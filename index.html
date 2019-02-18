@@ -340,6 +340,319 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/how-to-push-to-git-without-password/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赞赞的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/18/how-to-push-to-git-without-password/" class="post-title-link" itemprop="url">Git免密码登录方法</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-18 19:19:47" itemprop="dateCreated datePublished" datetime="2019-02-18T19:19:47+08:00">2019-02-18</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Git免密码登录方式"><a href="#Git免密码登录方式" class="headerlink" title="Git免密码登录方式"></a>Git免密码登录方式</h1><p>部署了Git服务的机器称为<font color="Red"><strong>服务端</strong></font>，执行<em>git clone</em>等操作的机器称为<font color="Blue"><strong>客户端</strong></font><br>总共需要两步：  </p>
+<ul>
+<li><font color="Blue"><strong>客户端</strong></font>创建ssh密钥，包括公钥和私钥</li>
+<li>把公钥部分明文保存到<font color="Red"><strong>服务端</strong></font> </li>
+</ul>
+<h2 id="第一步：客户端创建ssh密钥"><a href="#第一步：客户端创建ssh密钥" class="headerlink" title="第一步：客户端创建ssh密钥"></a>第一步：客户端创建ssh密钥</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "youremail@xx.xx"</span><br></pre></td></tr></table></figure>
+<p>结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/yourname/.ssh/id_rsa):</span><br><span class="line">/Users/yourname/.ssh/id_rsa already exists.</span><br><span class="line">Overwrite (y/n)? y</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in /Users/yourname/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /Users/yourname/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:88aXd/ksdOekskd7/dyT+ksieolsngSOje7sSKfmsdX youremail@xx.xx</span><br><span class="line">The key's randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|      E=oo..B.o  |</span><br><span class="line">|     .. o.oO*= . |</span><br><span class="line">|         +.o**   |</span><br><span class="line">|         oo +..  |</span><br><span class="line">|        = . .o o |</span><br><span class="line">|         . o. * .|</span><br><span class="line">|      . *   +o o |</span><br><span class="line">|       Xo* .  o .|</span><br><span class="line">|      =.O.= o+   |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure></p>
+<h2 id="第二步：明文保存到服务端"><a href="#第二步：明文保存到服务端" class="headerlink" title="第二步：明文保存到服务端"></a>第二步：明文保存到服务端</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /home/gitusername</span><br><span class="line">mkdir .ssh</span><br><span class="line">touch .ssh/authorized_keys</span><br><span class="line">vim .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/how-to-use-markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赞赞的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/18/how-to-use-markdown/" class="post-title-link" itemprop="url">Markdown使用笔记</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-18 19:18:18" itemprop="dateCreated datePublished" datetime="2019-02-18T19:18:18+08:00">2019-02-18</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Markdown使用笔记</p>
+<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># 标题</span><br></pre></td></tr></table></figure>
+<h2 id="小标题"><a href="#小标题" class="headerlink" title="小标题"></a>小标题</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## 小标题</span><br></pre></td></tr></table></figure>
+<ul>
+<li>无序列表项一</li>
+<li>无序列表项二</li>
+</ul>
+<ul>
+<li>无序列表项一</li>
+<li>无序列表项二</li>
+</ul>
+<ul>
+<li>无序列表项一</li>
+<li>无序列表项二<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">* 无序列表项一</span><br><span class="line">* 无序列表项二</span><br><span class="line">- 无序列表项一</span><br><span class="line">- 无序列表项二</span><br><span class="line">+ 无序列表项一</span><br><span class="line">+ 无序列表项二</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>有序列表项一</li>
+<li>有序列表项二</li>
+<li>有序列表项三<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 有序列表项一</span><br><span class="line"><span class="number">2</span>. 有序列表项二</span><br><span class="line"><span class="number">3</span>. 有序列表项三</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><em>斜体字</em><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*斜体字*</span><br></pre></td></tr></table></figure></p>
+<p><strong>加粗字体</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**加粗字体**</span><br></pre></td></tr></table></figure></p>
+<p><font size="12" color="Red">带大小和颜色的字体</font><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;font size=12 color=Red&gt;带大小和颜色的字体&lt;/font&gt;</span><br></pre></td></tr></table></figure></p>
+<table><tr><td bgcolor="Red"><font color="White">带背景色的字体</font></td></tr></table>  
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=Red&gt;&lt;font color=White&gt;带背景色的字体&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://blznav.akamaized.net/img/games/cards/card-overwatch-CN-85c98611cefd3018.jpg" alt="插入图片"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![插入图片](https:<span class="comment">//blznav.akamaized.net/img/games/cards/card-overwatch-CN-85c98611cefd3018.jpg)</span></span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/how-to-insert-image-into-page/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1487,323 +1800,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/15/how-to-create-a-new-page/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zan">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赞赞的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/15/how-to-create-a-new-page/" class="post-title-link" itemprop="url">【经验】创建新的博客页面的步骤</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-15 18:57:30" itemprop="dateCreated datePublished" datetime="2019-02-15T18:57:30+08:00">2019-02-15</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/shell/" itemprop="url" rel="index"><span itemprop="name">shell</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="安装hexo的依赖环境"><a href="#安装hexo的依赖环境" class="headerlink" title="安装hexo的依赖环境"></a>安装hexo的依赖环境</h1><ul>
-<li>node.js</li>
-<li>npm</li>
-</ul>
-<h1 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install ****</span><br></pre></td></tr></table></figure>
-<h1 id="初始化hexo环境"><a href="#初始化hexo环境" class="headerlink" title="初始化hexo环境"></a>初始化hexo环境</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-<h1 id="配置git环境"><a href="#配置git环境" class="headerlink" title="配置git环境"></a>配置git环境</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim _config.yml</span><br><span class="line">npm install ***git***</span><br></pre></td></tr></table></figure>
-<h1 id="创建并发布新页面"><a href="#创建并发布新页面" class="headerlink" title="创建并发布新页面"></a>创建并发布新页面</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new "your new page name" // 务必使用英文名字，因为中文名字不方便</span><br><span class="line">vim source/_post/your-new-page-name.md // 在编辑的时候，修改title为中文的博客名字</span><br><span class="line">// ...after edit... // 编辑完之后</span><br><span class="line">hexo g // 生成页面，也就是把博客放到git路径下</span><br><span class="line">hexo d // 部署页面，也就是把博客推送到github上</span><br></pre></td></tr></table></figure>
-<h1 id="如何编辑md文件（MarkDown格式文件）"><a href="#如何编辑md文件（MarkDown格式文件）" class="headerlink" title="如何编辑md文件（MarkDown格式文件）"></a>如何编辑md文件（MarkDown格式文件）</h1><p>使用网易云笔记本</p>
-<h1 id="如何修改主题的布局"><a href="#如何修改主题的布局" class="headerlink" title="如何修改主题的布局"></a>如何修改主题的布局</h1><p>参考<a href="https://theme-next.iissnan.com/getting-started.html#select-scheme" target="_blank" rel="noopener">选择Scheme</a></p>
-<h1 id="如何修改主题的语言"><a href="#如何修改主题的语言" class="headerlink" title="如何修改主题的语言"></a>如何修改主题的语言</h1><p>参考<a href="https://theme-next.iissnan.com/getting-started.html#select-language" target="_blank" rel="noopener">设置语言</a></p>
-<h1 id="如何修改主题的菜单"><a href="#如何修改主题的菜单" class="headerlink" title="如何修改主题的菜单"></a>如何修改主题的菜单</h1><p>参考<a href="https://theme-next.iissnan.com/getting-started.html#menu-settings" target="_blank" rel="noopener">设置菜单</a></p>
-<h1 id="如何设置主题的头像"><a href="#如何设置主题的头像" class="headerlink" title="如何设置主题的头像"></a>如何设置主题的头像</h1><p>参考<a href="https://theme-next.iissnan.com/getting-started.html#avatar-setting" target="_blank" rel="noopener">设置头像</a></p>
-<h1 id="如何添加阅读统计功能"><a href="#如何添加阅读统计功能" class="headerlink" title="如何添加阅读统计功能"></a>如何添加阅读统计功能</h1><ul>
-<li>基于百度：参考<a href="https://theme-next.iissnan.com/getting-started.html#analysis-system-baidu" target="_blank" rel="noopener">百度统计</a></li>
-<li>基于LeanCloud：参考<a href="https://notes.doublemine.me/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html" target="_blank" rel="noopener">为NexT主题添加文章阅读量统计功能</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/15/New-Article-2-haha/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zan">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赞赞的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/15/New-Article-2-haha/" class="post-title-link" itemprop="url">New Article 2, haha</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-15 18:54:02" itemprop="dateCreated datePublished" datetime="2019-02-15T18:54:02+08:00">2019-02-15</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#this is a title</p>
-<ul>
-<li>this is 1</li>
-<li>this is 2<br>[x] test1<br>[ ] test2</li>
-<li>test3 *<br><strong> test4 </strong></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1851,7 +1847,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

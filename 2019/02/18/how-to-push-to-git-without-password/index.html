@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="#head1  line1 line2  #head2  line1 line2  #end  nothing *">
-<meta name="keywords" content="图集">
+  <meta name="description" content="Git免密码登录方式部署了Git服务的机器称为服务端，执行git clone等操作的机器称为客户端总共需要两步：    客户端创建ssh密钥，包括公钥和私钥 把公钥部分明文保存到服务端   第一步：客户端创建ssh密钥1ssh-keygen -t rsa -C &quot;youremail@xx.xx&quot; 结果如下：12345678910111213141516171819202122Generating">
+<meta name="keywords" content="技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【图集】我的图集">
-<meta property="og:url" content="http://yoursite.com/2019/02/18/my-gallery/index.html">
+<meta property="og:title" content="Git免密码登录方法">
+<meta property="og:url" content="http://yoursite.com/2019/02/18/how-to-push-to-git-without-password/index.html">
 <meta property="og:site_name" content="赞赞的博客">
-<meta property="og:description" content="#head1  line1 line2  #head2  line1 line2  #end  nothing *">
+<meta property="og:description" content="Git免密码登录方式部署了Git服务的机器称为服务端，执行git clone等操作的机器称为客户端总共需要两步：    客户端创建ssh密钥，包括公钥和私钥 把公钥部分明文保存到服务端   第一步：客户端创建ssh密钥1ssh-keygen -t rsa -C &quot;youremail@xx.xx&quot; 结果如下：12345678910111213141516171819202122Generating">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-18T06:37:30.000Z">
+<meta property="og:updated_time" content="2019-02-18T11:20:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【图集】我的图集">
-<meta name="twitter:description" content="#head1  line1 line2  #head2  line1 line2  #end  nothing *">
+<meta name="twitter:title" content="Git免密码登录方法">
+<meta name="twitter:description" content="Git免密码登录方式部署了Git服务的机器称为服务端，执行git clone等操作的机器称为客户端总共需要两步：    客户端创建ssh密钥，包括公钥和私钥 把公钥部分明文保存到服务端   第一步：客户端创建ssh密钥1ssh-keygen -t rsa -C &quot;youremail@xx.xx&quot; 结果如下：12345678910111213141516171819202122Generating">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/18/my-gallery/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/18/how-to-push-to-git-without-password/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>【图集】我的图集 | 赞赞的博客</title>
+  <title>Git免密码登录方法 | 赞赞的博客</title>
   
 
 
@@ -344,7 +344,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/my-gallery/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/how-to-push-to-git-without-password/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zan">
@@ -361,7 +361,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【图集】我的图集
+          <h1 class="post-title" itemprop="name headline">Git免密码登录方法
 
               
             
@@ -387,7 +387,7 @@
                 
               
 
-              <time title="创建时间：2019-02-18 14:34:45" itemprop="dateCreated datePublished" datetime="2019-02-18T14:34:45+08:00">2019-02-18</time>
+              <time title="创建时间：2019-02-18 19:19:47" itemprop="dateCreated datePublished" datetime="2019-02-18T19:19:47+08:00">2019-02-18</time>
             
 
             
@@ -422,20 +422,14 @@
       
 
       
-        <p>#head1</p>
+        <h1 id="Git免密码登录方式"><a href="#Git免密码登录方式" class="headerlink" title="Git免密码登录方式"></a>Git免密码登录方式</h1><p>部署了Git服务的机器称为<font color="Red"><strong>服务端</strong></font>，执行<em>git clone</em>等操作的机器称为<font color="Blue"><strong>客户端</strong></font><br>总共需要两步：  </p>
 <ul>
-<li>line1</li>
-<li>line2</li>
+<li><font color="Blue"><strong>客户端</strong></font>创建ssh密钥，包括公钥和私钥</li>
+<li>把公钥部分明文保存到<font color="Red"><strong>服务端</strong></font> </li>
 </ul>
-<p>#head2</p>
-<ul>
-<li>line1</li>
-<li>line2</li>
-</ul>
-<p>#end</p>
-<ul>
-<li>nothing *</li>
-</ul>
+<h2 id="第一步：客户端创建ssh密钥"><a href="#第一步：客户端创建ssh密钥" class="headerlink" title="第一步：客户端创建ssh密钥"></a>第一步：客户端创建ssh密钥</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "youremail@xx.xx"</span><br></pre></td></tr></table></figure>
+<p>结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/yourname/.ssh/id_rsa):</span><br><span class="line">/Users/yourname/.ssh/id_rsa already exists.</span><br><span class="line">Overwrite (y/n)? y</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in /Users/yourname/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /Users/yourname/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:88aXd/ksdOekskd7/dyT+ksieolsngSOje7sSKfmsdX youremail@xx.xx</span><br><span class="line">The key's randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|      E=oo..B.o  |</span><br><span class="line">|     .. o.oO*= . |</span><br><span class="line">|         +.o**   |</span><br><span class="line">|         oo +..  |</span><br><span class="line">|        = . .o o |</span><br><span class="line">|         . o. * .|</span><br><span class="line">|      . *   +o o |</span><br><span class="line">|       Xo* .  o .|</span><br><span class="line">|      =.O.= o+   |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure></p>
+<h2 id="第二步：明文保存到服务端"><a href="#第二步：明文保存到服务端" class="headerlink" title="第二步：明文保存到服务端"></a>第二步：明文保存到服务端</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /home/gitusername</span><br><span class="line">mkdir .ssh</span><br><span class="line">touch .ssh/authorized_keys</span><br><span class="line">vim .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -459,7 +453,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/图集/" rel="tag"># 图集</a>
+            <a href="/tags/技术/" rel="tag"># 技术</a>
           
         </div>
       
@@ -472,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/18/how-to-create-comments/" rel="next" title="【经验】如何创建评论系统">
-                <i class="fa fa-chevron-left"></i> 【经验】如何创建评论系统
+              <a href="/2019/02/18/how-to-use-markdown/" rel="next" title="Markdown使用笔记">
+                <i class="fa fa-chevron-left"></i> Markdown使用笔记
               </a>
             
           </div>
@@ -481,10 +475,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/18/my-gallery-2/" rel="prev" title="【图集】我的图集2">
-                【图集】我的图集2 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -529,8 +519,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -612,6 +611,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git免密码登录方式"><span class="nav-number">1.</span> <span class="nav-text">Git免密码登录方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步：客户端创建ssh密钥"><span class="nav-number">1.1.</span> <span class="nav-text">第一步：客户端创建ssh密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步：明文保存到服务端"><span class="nav-number">1.2.</span> <span class="nav-text">第二步：明文保存到服务端</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
