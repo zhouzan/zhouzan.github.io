@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="检出代码 以hexo为例  1git clone https://github.com/hexojs/hexo.git 拉新分支 基于当前代码，拉出新的分支  1git checkout -b newbranch 提交代码12345678# 查看变动git status# 添加变动内容，例如添加当前目录下的所有文件git add .# 提交变动git commit -m &quot;your name: w">
+<meta name="keywords" content="技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git简明教程">
+<meta property="og:url" content="http://yoursite.com/2019/02/20/how-to-use-git/index.html">
+<meta property="og:site_name" content="赞赞的博客">
+<meta property="og:description" content="检出代码 以hexo为例  1git clone https://github.com/hexojs/hexo.git 拉新分支 基于当前代码，拉出新的分支  1git checkout -b newbranch 提交代码12345678# 查看变动git status# 添加变动内容，例如添加当前目录下的所有文件git add .# 提交变动git commit -m &quot;your name: w">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-20T08:56:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git简明教程">
+<meta name="twitter:description" content="检出代码 以hexo为例  1git clone https://github.com/hexojs/hexo.git 拉新分支 基于当前代码，拉出新的分支  1git checkout -b newbranch 提交代码12345678# 查看变动git status# 添加变动内容，例如添加当前目录下的所有文件git add .# 提交变动git commit -m &quot;your name: w">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/20/how-to-use-git/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Git简明教程 | 赞赞的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赞赞的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">努力！奋斗！</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/how-to-use-git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赞赞的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git简明教程
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-20 16:55:08" itemprop="dateCreated datePublished" datetime="2019-02-20T16:55:08+08:00">2019-02-20</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/" itemprop="url" rel="index"><span itemprop="name">原创</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="检出代码"><a href="#检出代码" class="headerlink" title="检出代码"></a>检出代码</h2><blockquote>
+<p>以hexo为例</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/hexojs/hexo.git</span><br></pre></td></tr></table></figure>
+<h2 id="拉新分支"><a href="#拉新分支" class="headerlink" title="拉新分支"></a>拉新分支</h2><blockquote>
+<p>基于当前代码，拉出新的分支</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b newbranch</span><br></pre></td></tr></table></figure>
+<h2 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看变动</span></span><br><span class="line">git status</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加变动内容，例如添加当前目录下的所有文件</span></span><br><span class="line">git add .</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提交变动</span></span><br><span class="line">git commit -m "your name: what did you do"</span><br><span class="line"><span class="meta">#</span><span class="bash"> push到远端</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<h2 id="更新代码"><a href="#更新代码" class="headerlink" title="更新代码"></a>更新代码</h2><blockquote>
+<p>更新并merge，如有代码修改，需要提交一次commit</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：git pull命令等价于执行git fetch到本地，然后再执行git merge</strong></p>
+</blockquote>
+<h2 id="合并代码"><a href="#合并代码" class="headerlink" title="合并代码"></a>合并代码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 从source_branch 合并到--&gt; target_branch</span></span><br><span class="line">git branch</span><br><span class="line">git checkout target_branch</span><br><span class="line">git merge source_branch</span><br></pre></td></tr></table></figure>
+<h2 id="关于HEAD指针"><a href="#关于HEAD指针" class="headerlink" title="关于HEAD指针"></a>关于HEAD指针</h2><blockquote>
+<p>git关于版本控制的命令中，经常会出现<strong>HEAD</strong>，而<strong>HEAD</strong>类似于指针，指向当前的提交（commit），在实际使用中，HEAD等价于当前提交的哈希，在知道哈希的情况下，可以用哈希值替换HEAD，但是HEAD使用更方便，不需要了解哈希值即可。并且，HEAD可以用于访问相对提交记录，比如”倒数第二次提交“等这种形式。</p>
+</blockquote>
+<p>假设当前的情形如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span> -4</span></span><br><span class="line">commit 3430cc7e3df4d122590648e5496aee5c4de86b0c (HEAD -&gt; branch1, origin/branch1)</span><br><span class="line">commit 01397bfe7dcb2d316c7d5b690426197bc206e4cd</span><br><span class="line">commit f88ef5ebeae2fd86c82001ec59b3dfe0d8a2a834</span><br><span class="line">commit 65ada1e0bd798c8c0b7201d2cf973a1e7e7eae38</span><br></pre></td></tr></table></figure></p>
+<p>此时，存在以下对等关系：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> **HEAD**   等价于 3430cc7e3df4d122590648e5496aee5c4de86b0c，也就是最新的提交</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> **HEAD^**  等价于 01397bfe7dcb2d316c7d5b690426197bc206e4cd，也就是前一次提交</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> **HEAD~1** 等价于 HEAD^</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> **HEAD~2** 等价于 f88ef5ebeae2fd86c82001ec59b3dfe0d8a2a834，也就是倒数第三次提交</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="回滚代码"><a href="#回滚代码" class="headerlink" title="回滚代码"></a>回滚代码</h2><blockquote>
+<p>回滚代码有一下四种情形：修改之后尚未add、已经add但尚未commit、已经commit但尚未push、已经push到了远端。</p>
+</blockquote>
+<h3 id="1-修改之后尚未add，使用checkout命令"><a href="#1-修改之后尚未add，使用checkout命令" class="headerlink" title="1. 修改之后尚未add，使用checkout命令"></a>1. 修改之后尚未add，使用checkout命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 恢复当前整个目录</span></span><br><span class="line">git checkout .</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 仅恢复指定的文件，例如README.md</span></span><br><span class="line">git checkout README.md</span><br></pre></td></tr></table></figure>
+<h3 id="2-已经add但尚未commit，使用reset命令"><a href="#2-已经add但尚未commit，使用reset命令" class="headerlink" title="2. 已经add但尚未commit，使用reset命令"></a>2. 已经add但尚未commit，使用reset命令</h3><blockquote>
+<p><strong>–soft</strong>  仅移动HEAD，回退commit版本，不恢复文件，不修改文件的add状态<br><strong>–mixed</strong> 移动HEAD，不恢复文件，但是恢复文件的add状态，即add的文件变成未add状态<br><strong>–hard</strong>  移动HEAD，还恢复文件，把已经修改的文件恢复成原始的样子，丢弃所有的修改<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 恢复成已经add的状态，文件的修改都保留，但是修改不会被push到远端</span></span><br><span class="line">git reset --soft HEAD</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 恢复成未add的状态</span></span><br><span class="line">git reset HEAD</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者（等价于）</span></span><br><span class="line">git reset --mixed HEAD</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 恢复成未修改的样子，也就是恢复成HEAD所指向的提交记录</span></span><br><span class="line">git reset --hard HEAD</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 两步恢复成未修改的样子</span></span><br><span class="line">git reset --soft HEAD</span><br><span class="line">git checkout .</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="3-已经commit但尚未push，使用reset命令"><a href="#3-已经commit但尚未push，使用reset命令" class="headerlink" title="3. 已经commit但尚未push，使用reset命令"></a>3. 已经commit但尚未push，使用reset命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 恢复成已经add的状态，文件的修改都保留，但是修改不会被push到远端</span></span><br><span class="line">git reset --soft HEAD^</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 恢复成未add的状态，文件的修改都保留，但是</span></span><br><span class="line">git reset HEAD^</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者（等价于）</span></span><br><span class="line">git reset --mixed HEAD^</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消上一步的commit，也就是恢复成HEAD的前一次提交记录</span></span><br><span class="line">git reset --hard HEAD^</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 假设HEAD的哈希为56719a1，HEAD的前一个哈希为4e9ca9b</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 上述命令等价于</span></span><br><span class="line">git reset --hard 4e9ca9b</span><br></pre></td></tr></table></figure>
+<h3 id="4-已经push到了远端"><a href="#4-已经push到了远端" class="headerlink" title="4. 已经push到了远端"></a>4. 已经push到了远端</h3><blockquote>
+<p>分两种方法：保留远端的提交记录、删除远端的提交记录</p>
+</blockquote>
+<h4 id="a-保留远端记录，提交“逆操作”，使用revert命令"><a href="#a-保留远端记录，提交“逆操作”，使用revert命令" class="headerlink" title="a. 保留远端记录，提交“逆操作”，使用revert命令"></a>a. 保留远端记录，提交“逆操作”，使用revert命令</h4><blockquote>
+<p>注意：一般一次revert操作仅针对<strong>一次</strong>的commit，而<strong>不会</strong>一次revert多次commit</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 撤销最后一次commit，也就是撤回到前一次</span></span><br><span class="line">git revert HEAD</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 撤销回到前前一次commit</span></span><br><span class="line">git revert HEAD^</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 撤回第3次(0,1,2,*3*)的操作，也就是提交一个逆操作来抹掉那次提交</span></span><br><span class="line">git revert HEAD~3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 撤回指定哈希的某次操作</span></span><br><span class="line">git revert f88ef5ebeae2fd86c82001ec59b3dfe0d8a2a834</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 撤回之后，再提交到远端</span></span><br><span class="line">git status</span><br><span class="line">git pull</span><br><span class="line">git push</span><br><span class="line">git log -3</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：revert操作可能会产生<strong>冲突</strong></p>
+</blockquote>
+<h4 id="b-删除远端记录，使用reset命令"><a href="#b-删除远端记录，使用reset命令" class="headerlink" title="b. 删除远端记录，使用reset命令"></a>b. 删除远端记录，使用reset命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看当前的提交记录，获取目标版本的哈希值</span></span><br><span class="line">git log -n 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 恢复本地的HEAD指针为旧版本</span></span><br><span class="line">git reset --hard XXXXXXXXXX</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 把本地的HEAD指针所指内容，强制覆盖到远端</span></span><br><span class="line">git push origin HEAD --force</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新并查看效果</span></span><br><span class="line">git pull</span><br><span class="line">git log -n 3</span><br></pre></td></tr></table></figure>
+<h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看当前状态</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前分支</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除目标分支，例如：the_branch_to_delete</span></span><br><span class="line">git branch -d the_branch_to_delete</span><br></pre></td></tr></table></figure>
+<h2 id="查看修改"><a href="#查看修改" class="headerlink" title="查看修改"></a>查看修改</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看当前未add且未提交的修改</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看某次修改</span></span><br><span class="line">git show 4e9ca9b</span><br><span class="line">git show HEAD</span><br><span class="line">git show HEAD~1</span><br><span class="line">git show HEAD~2</span><br></pre></td></tr></table></figure>
+<h2 id="其它冷知识"><a href="#其它冷知识" class="headerlink" title="其它冷知识"></a>其它冷知识</h2><p>下面两个命令是等价的：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git show HEAD -s </span><br><span class="line">git log -1</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/20/how-to-create-a-hexo-blog-website/" rel="next" title="创建hexo博客完整步骤">
+                <i class="fa fa-chevron-left"></i> 创建hexo博客完整步骤
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Zan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#检出代码"><span class="nav-number">1.</span> <span class="nav-text">检出代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉新分支"><span class="nav-number">2.</span> <span class="nav-text">拉新分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交代码"><span class="nav-number">3.</span> <span class="nav-text">提交代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新代码"><span class="nav-number">4.</span> <span class="nav-text">更新代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并代码"><span class="nav-number">5.</span> <span class="nav-text">合并代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于HEAD指针"><span class="nav-number">6.</span> <span class="nav-text">关于HEAD指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回滚代码"><span class="nav-number">7.</span> <span class="nav-text">回滚代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-修改之后尚未add，使用checkout命令"><span class="nav-number">7.1.</span> <span class="nav-text">1. 修改之后尚未add，使用checkout命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-已经add但尚未commit，使用reset命令"><span class="nav-number">7.2.</span> <span class="nav-text">2. 已经add但尚未commit，使用reset命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-已经commit但尚未push，使用reset命令"><span class="nav-number">7.3.</span> <span class="nav-text">3. 已经commit但尚未push，使用reset命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-已经push到了远端"><span class="nav-number">7.4.</span> <span class="nav-text">4. 已经push到了远端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-保留远端记录，提交“逆操作”，使用revert命令"><span class="nav-number">7.4.1.</span> <span class="nav-text">a. 保留远端记录，提交“逆操作”，使用revert命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-删除远端记录，使用reset命令"><span class="nav-number">7.4.2.</span> <span class="nav-text">b. 删除远端记录，使用reset命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除分支"><span class="nav-number">8.</span> <span class="nav-text">删除分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看修改"><span class="nav-number">9.</span> <span class="nav-text">查看修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它冷知识"><span class="nav-number">10.</span> <span class="nav-text">其它冷知识</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zan</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
