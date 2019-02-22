@@ -340,6 +340,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/how-to-capture-view-in-android/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剥壳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/22/how-to-capture-view-in-android/" class="post-title-link" itemprop="url">Android的控件截图方法实现</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-22 10:54:00" itemprop="dateCreated datePublished" datetime="2019-02-22T10:54:00+08:00">2019-02-22</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/" itemprop="url" rel="index"><span itemprop="name">原创</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>总共两步：</p>
+<blockquote>
+<p>第一步：控件转换成Bitmap</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Bitmap <span class="title">getViewBitmap</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">    Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), </span><br><span class="line">        Bitmap.Config.ARGB_8888);</span><br><span class="line">    Canvas canvas = <span class="keyword">new</span> Canvas(bitmap);</span><br><span class="line">    view.draw(canvas);</span><br><span class="line">    <span class="keyword">return</span> bitmap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第二步：Bitmap保存为PNG文件</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSaveUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">saveBitmapToSDCard</span><span class="params">(Bitmap bitmap, String filePath, </span></span></span><br><span class="line"><span class="function"><span class="params">            String fileName)</span> </span>&#123;</span><br><span class="line">        File sdcard = Environment.getExternalStorageDirectory();</span><br><span class="line">        File target = <span class="keyword">new</span> File(sdcard, fileName);</span><br><span class="line">        <span class="keyword">if</span> (!TextUtils.isEmpty(filePath)) &#123;</span><br><span class="line">            File dir = <span class="keyword">new</span> File(sdcard, filePath);</span><br><span class="line">            <span class="keyword">if</span> (!dir.exists()) &#123;</span><br><span class="line">                dir.mkdirs();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            target = <span class="keyword">new</span> File(dir, fileName);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (target.exists()) &#123;</span><br><span class="line"><span class="comment">//            target.delete();</span></span><br><span class="line">            Log.d(<span class="string">"[error]"</span> + fileName + <span class="string">" already exists!"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        FileOutputStream outputStream = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            outputStream = <span class="keyword">new</span> FileOutputStream(target);</span><br><span class="line">            bitmap.compress(Bitmap.CompressFormat.PNG, <span class="number">90</span>, outputStream);</span><br><span class="line">            outputStream.flush();</span><br><span class="line">            Log.d(<span class="string">"[ok]"</span> + fileName + <span class="string">" done!"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        close(outputStream);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Closeable closeable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (closeable != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                closeable.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/how-to-set-the-size-of-threadpool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -849,8 +1014,8 @@
       
         
           
-            <h2 id="1-创建Git服务器"><a href="#1-创建Git服务器" class="headerlink" title="1. 创建Git服务器"></a>1. 创建Git服务器</h2><h3 id="Git服务器免密码登录"><a href="#Git服务器免密码登录" class="headerlink" title="Git服务器免密码登录"></a>Git服务器免密码登录</h3><p>使用ssh-keygen生成公钥和私钥，把公钥保存到git服务器上<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 客户端</span><br><span class="line">ssh-keygen -t rsa -C "youremail@xx.xx"</span><br><span class="line">cat ~/.ssh/id_rsa.pub # 输出公钥内容，用于复制粘贴</span><br><span class="line"><span class="meta">#</span> 或者，也可以直接把公钥内容复制到剪贴板</span><br><span class="line">pbcopy &lt; ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="meta">#</span> Copies the contents of the id_rsa.pub file to your clipboard</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 服务器</span><br><span class="line">cd /home/yourgituser</span><br><span class="line">mkdir .ssh</span><br><span class="line">touch .ssh/authorized_keys</span><br><span class="line">vim .ssh/authorized_keys # 粘贴公钥内容到这里</span><br></pre></td></tr></table></figure></p>
-<h2 id="2-创建Hexo客户端"><a href="#2-创建Hexo客户端" class="headerlink" title="2. 创建Hexo客户端"></a>2. 创建Hexo客户端</h2><h3 id="安装node-js、npm、hexo等等"><a href="#安装node-js、npm、hexo等等" class="headerlink" title="安装node.js、npm、hexo等等"></a>安装node.js、npm、hexo等等</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 安装node.js</span><br><span class="line">node -v</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 安装npm</span><br><span class="line">npm -v</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 安装hexo</span><br><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+            <h2 id="1-创建Git服务器"><a href="#1-创建Git服务器" class="headerlink" title="1. 创建Git服务器"></a>1. 创建Git服务器</h2><h3 id="Git服务器免密码登录"><a href="#Git服务器免密码登录" class="headerlink" title="Git服务器免密码登录"></a>Git服务器免密码登录</h3><p>使用ssh-keygen生成公钥和私钥，把公钥保存到git服务器上<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 客户端</span></span><br><span class="line">ssh-keygen -t rsa -C "youremail@xx.xx"</span><br><span class="line">cat ~/.ssh/id_rsa.pub # 输出公钥内容，用于复制粘贴</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者，也可以直接把公钥内容复制到剪贴板</span></span><br><span class="line">pbcopy &lt; ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="meta">#</span><span class="bash"> Copies the contents of the id_rsa.pub file to your clipboard</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 服务器</span></span><br><span class="line">cd /home/yourgituser</span><br><span class="line">mkdir .ssh</span><br><span class="line">touch .ssh/authorized_keys</span><br><span class="line">vim .ssh/authorized_keys # 粘贴公钥内容到这里</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-创建Hexo客户端"><a href="#2-创建Hexo客户端" class="headerlink" title="2. 创建Hexo客户端"></a>2. 创建Hexo客户端</h2><h3 id="安装node-js、npm、hexo等等"><a href="#安装node-js、npm、hexo等等" class="headerlink" title="安装node.js、npm、hexo等等"></a>安装node.js、npm、hexo等等</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装node.js</span></span><br><span class="line">node -v</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装npm</span></span><br><span class="line">npm -v</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装hexo</span></span><br><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 <h3 id="初始化hexo目录"><a href="#初始化hexo目录" class="headerlink" title="初始化hexo目录"></a>初始化hexo目录</h3><p>找一个目标目录，执行：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">vim _config.yml # 配置title，语言，主题和git环境</span><br></pre></td></tr></table></figure></p>
 <h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next.git themes/next</span><br><span class="line">vim themes/next/_config.yml # 配置菜单和其它属性</span><br></pre></td></tr></table></figure>
 <h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
@@ -1785,155 +1950,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/how-to-create-comments/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zan">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剥壳">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/18/how-to-create-comments/" class="post-title-link" itemprop="url">【经验】如何创建评论系统</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-18 11:18:37" itemprop="dateCreated datePublished" datetime="2019-02-18T11:18:37+08:00">2019-02-18</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="自建评论系统所需条件"><a href="#自建评论系统所需条件" class="headerlink" title="自建评论系统所需条件"></a>自建评论系统所需条件</h1><ul>
-<li>服务器</li>
-<li>账号系统，包括登陆／找回密码／邮箱手机号验证系统等等</li>
-<li>评论管理系统，包括评论查看／删除／回复等等</li>
-</ul>
-<h1 id="不需要重复造轮子"><a href="#不需要重复造轮子" class="headerlink" title="不需要重复造轮子"></a>不需要重复造轮子</h1><p>可以使用线上已有的评论系统，例如：</p>
-<ul>
-<li><a href="https://www.bluelzy.com/articles/use_valine_for_your_blog.html" target="_blank" rel="noopener">valine（推荐）</a></li>
-<li><a href="https://github.com/imsun/gitment" target="_blank" rel="noopener">gitment</a></li>
-<li><a href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md" target="_blank" rel="noopener">gitalk（推荐）</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1981,7 +1997,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
