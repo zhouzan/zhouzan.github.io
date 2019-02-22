@@ -96,25 +96,29 @@
 
 
 
-  <meta name="description" content="测试java代码12345public class A &amp;#123;    public static void main(String args[]) &amp;#123;        System.out.println(&quot;hello&quot;);    &amp;#125;&amp;#125;">
-<meta name="keywords" content="技术,网文">
+  <meta name="description" content="前言本文讨论Java线程池的使用中，固定线程池的大小如何设置。目标是提高请求成功率，降低超时率。 典型代码如下：1234567protected static ExecutorService sExecutors = Executors.newFixedThreadPool(3);protected Future&amp;lt;?&amp;gt; mTask = sExecutors.submit(new Run">
+<meta name="keywords" content="技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test java page">
-<meta property="og:url" content="http://yoursite.com/2019/02/18/test-java-page/index.html">
+<meta property="og:title" content="剥壳：如何合理的设置线程池的大小">
+<meta property="og:url" content="http://yoursite.com/2019/02/21/how-to-set-the-size-of-threadpool/index.html">
 <meta property="og:site_name" content="剥壳">
-<meta property="og:description" content="测试java代码12345public class A &amp;#123;    public static void main(String args[]) &amp;#123;        System.out.println(&quot;hello&quot;);    &amp;#125;&amp;#125;">
+<meta property="og:description" content="前言本文讨论Java线程池的使用中，固定线程池的大小如何设置。目标是提高请求成功率，降低超时率。 典型代码如下：1234567protected static ExecutorService sExecutors = Executors.newFixedThreadPool(3);protected Future&amp;lt;?&amp;gt; mTask = sExecutors.submit(new Run">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-18T03:01:04.000Z">
+<meta property="og:image" content="https://p5.ssl.qhimg.com/t012037015e34cd4932.png">
+<meta property="og:image" content="https://p4.ssl.qhimg.com/t010e8a3790653d7831.png">
+<meta property="og:image" content="https://p4.ssl.qhimg.com/t01868eb0610b94530d.png">
+<meta property="og:updated_time" content="2019-02-22T01:46:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test java page">
-<meta name="twitter:description" content="测试java代码12345public class A &amp;#123;    public static void main(String args[]) &amp;#123;        System.out.println(&quot;hello&quot;);    &amp;#125;&amp;#125;">
+<meta name="twitter:title" content="剥壳：如何合理的设置线程池的大小">
+<meta name="twitter:description" content="前言本文讨论Java线程池的使用中，固定线程池的大小如何设置。目标是提高请求成功率，降低超时率。 典型代码如下：1234567protected static ExecutorService sExecutors = Executors.newFixedThreadPool(3);protected Future&amp;lt;?&amp;gt; mTask = sExecutors.submit(new Run">
+<meta name="twitter:image" content="https://p5.ssl.qhimg.com/t012037015e34cd4932.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/18/test-java-page/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/21/how-to-set-the-size-of-threadpool/">
 
 
 
@@ -124,7 +128,7 @@
   };
 </script>
 
-  <title>test java page | 剥壳</title>
+  <title>剥壳：如何合理的设置线程池的大小 | 剥壳</title>
   
 
 
@@ -344,7 +348,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/test-java-page/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/how-to-set-the-size-of-threadpool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zan">
@@ -361,7 +365,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">test java page
+          <h1 class="post-title" itemprop="name headline">剥壳：如何合理的设置线程池的大小
 
               
             
@@ -387,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2019-02-18 10:59:13" itemprop="dateCreated datePublished" datetime="2019-02-18T10:59:13+08:00">2019-02-18</time>
+              <time title="创建时间：2019-02-21 14:52:24" itemprop="dateCreated datePublished" datetime="2019-02-21T14:52:24+08:00">2019-02-21</time>
             
 
             
@@ -405,7 +409,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/" itemprop="url" rel="index"><span itemprop="name">原创</span></a></span>
 
                 
                 
@@ -440,7 +444,59 @@
       
 
       
-        <h1 id="测试java代码"><a href="#测试java代码" class="headerlink" title="测试java代码"></a>测试java代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>本文讨论Java线程池的使用中，固定线程池的大小如何设置。目标是<u><strong>提高请求成功率，降低超时率</strong></u>。</p>
+<p>典型代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">static</span> ExecutorService sExecutors = Executors.newFixedThreadPool(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">protected</span> Future&lt;?&gt; mTask = sExecutors.submit(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 做些耗时的事情</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h4><p>这个问题要分两种情况讨论，就是<u><strong>各个线程之间会不会产生“拥挤”</strong></u>。就像排队一样，<u><strong>有秩序的排队会使整体效率更高，没有秩序则会整体低效甚至发生“踩踏事故”</strong></u>。</p>
+<p>评估线程之间是否产生“拥挤”就是看线程之间是否会争抢有限的资源，例如CPU、IO、网络等等。举两个极端的例子：</p>
+<ul>
+<li>假设网速为1MB每秒，每个下载任务大约10MB，这样的业务就是拥挤的，并发会导致所有线程延时完成；</li>
+<li>假设网速为1MB每秒，每个下载任务大约50KB，这样的业务就是不拥挤的，并发也能一起完成。</li>
+</ul>
+<p>于是，我们需要先区分业务是否<u><strong>拥挤</strong></u>，以下分两种情形讨论。</p>
+<h4 id="不“拥挤”的业务"><a href="#不“拥挤”的业务" class="headerlink" title="不“拥挤”的业务"></a>不“拥挤”的业务</h4><p>首先，对于<u><strong>不拥挤</strong></u>的情形，通常来说并发线程越多，则线程池应该越大，举例来说：如果并发10个线程，线程池大小为1，则最后一个线程完成所需要的时间就是10倍的线程平均耗时，而如果线程池大小为10，则最后一个线程完成也接近于线程平均耗时。但是假如并发很少而线程池也很大，这有什么坏处吗？并没有，也就是说线程池都是越大越好，当然规模与评估的线程并发数要相当，假设并发2-5，线程池设置为500也是没有意义的。</p>
+<blockquote>
+<p><strong>结论</strong>：对于不拥挤的业务，线程池与并发规模相当即可，如：略高于并发平均值，或者等于并发峰值，在代码实践中，可以编写方法监控并发量进行调整。</p>
+</blockquote>
+<h4 id="“拥挤”的业务"><a href="#“拥挤”的业务" class="headerlink" title="“拥挤”的业务"></a>“拥挤”的业务</h4><p>其次，对于<u><strong>拥挤</strong></u>的情形，则不是线程池越大越好，因为大线程池反而可能会拖慢<u><strong>第1个线程</strong></u>的完成时间。而线程过小，如果其中个别线程阻塞，则会影响后面的线程执行。而且对于网络请求，还存在网络阻塞、服务器无法连接、信号短时间内不好等等现象，如果线程池设置的过小，即使客户端网速足够，也会因为当前线程阻塞而导致后面等待的任务延时执行甚至超时。说复杂一点，对于网络请求，需要考虑以下几个问题：</p>
+<ul>
+<li>并发规模：正相关；</li>
+<li>访问的域名数量：正相关；</li>
+<li>CPU核心数：正相关；</li>
+<li>请求的数据量：负相关；</li>
+<li>客户端网速：正相关；</li>
+</ul>
+<p>举例来说：在资源下载或者数据上报业务中，可以评估数据量的大小和客户端的网速之间的比例。这里做一个“盲目”的假设：</p>
+<ul>
+<li>假设客户端下载网速为40Mbps（约5MB每秒），上传网速为24Mbps（约3MB每秒）</li>
+<li>假设资源下载的数据量为500KB，则理想情况下1秒内可以完成并发10个线程，（基于5MB/500KB计算得来）；</li>
+<li>假设数据上报的数据量为100KB，则理想情况下1秒内可以完成并发30个线程基于3MB/100KB计算得来）。</li>
+</ul>
+<p>我们可以通过下面三个甘特图来描述<u><strong>拥挤业务</strong></u>并发的结果：</p>
+<blockquote>
+<p>假设：单核CPU，单个任务独立运行占用资源为100%，单任务耗时为1</p>
+</blockquote>
+<ol>
+<li><strong>小线程池，单线程，并发6个任务，任一时刻只有1个在独占资源执行：</strong></li>
+</ol>
+<p><img src="https://p5.ssl.qhimg.com/t012037015e34cd4932.png" alt></p>
+<p>所有的任务从发起到完成，总耗时为1 + 2 + 3 + 4 + 5 + 6 = 21。<br>平均耗时：3.5</p>
+<ol start="2">
+<li><strong>大线程池，2线程，并发6个任务，同时有2个任务在共享资源执行：</strong></li>
+</ol>
+<p><img src="https://p4.ssl.qhimg.com/t010e8a3790653d7831.png" alt></p>
+<p>所有的任务从发起到完成，总耗时为2 + 2 + 4 + 4 + 6 + 6 = 24。<br>平均耗时：4</p>
+<ol start="3">
+<li><strong>大线程池，6线程，并发6个任务，同时有6个任务在共享资源执行：</strong></li>
+</ol>
+<p><img src="https://p4.ssl.qhimg.com/t01868eb0610b94530d.png" alt></p>
+<p>所有的任务从发起到完成，总耗时为6 + 6 + 6 + 6 + 6 + 6 = 36。<br>平均耗时：6</p>
+<blockquote>
+<p><strong>结论</strong>：对于拥挤的业务，线程池越小，任务完成总耗时越低，但是小幅调大线程池可以在对结果影响不大的情况下，可以降低单线程阻塞引起整个队列的故障的概率。</p>
+</blockquote>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>线程池大小与业务类型是否拥挤有关，而判断业务是否拥挤，可以从是否占用CPU、IO等资源角度来评估，也可以从代码里进行并发测试，计算业务平均耗时，也就是从发起任务到任务完成所用时间的平均值。</p>
+<blockquote>
+<p>如果并发高时平均耗时明显升高，则为<strong>拥挤任务</strong>，线程池大小可以设置为典型并发量的一半以下，两个以上；<br>如果高并发并不影响平均耗时，则为<strong>非拥挤任务</strong>，线程池大小可以设置为典型并发量。</p>
+</blockquote>
 
       
     </div>
@@ -466,8 +522,6 @@
           
             <a href="/tags/技术/" rel="tag"># 技术</a>
           
-            <a href="/tags/网文/" rel="tag"># 网文</a>
-          
         </div>
       
 
@@ -479,8 +533,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/18/tags-page/" rel="next" title="【普通】标签页">
-                <i class="fa fa-chevron-left"></i> 【普通】标签页
+              <a href="/2019/02/20/how-to-use-git/" rel="next" title="Git简明教程">
+                <i class="fa fa-chevron-left"></i> Git简明教程
               </a>
             
           </div>
@@ -488,10 +542,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/18/how-to-create-comments/" rel="prev" title="【经验】如何创建评论系统">
-                【经验】如何创建评论系统 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -641,7 +691,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#测试java代码"><span class="nav-number">1.</span> <span class="nav-text">测试java代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#讨论"><span class="nav-number">2.</span> <span class="nav-text">讨论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不“拥挤”的业务"><span class="nav-number">3.</span> <span class="nav-text">不“拥挤”的业务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#“拥挤”的业务"><span class="nav-number">4.</span> <span class="nav-text">“拥挤”的业务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
             
 
           </div>
