@@ -429,7 +429,7 @@
 </ul>
 <h2 id="第一步：客户端创建ssh密钥"><a href="#第一步：客户端创建ssh密钥" class="headerlink" title="第一步：客户端创建ssh密钥"></a>第一步：客户端创建ssh密钥</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "youremail@xx.xx"</span><br></pre></td></tr></table></figure>
 <p>结果如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/yourname/.ssh/id_rsa):</span><br><span class="line">/Users/yourname/.ssh/id_rsa already exists.</span><br><span class="line">Overwrite (y/n)? y</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in /Users/yourname/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /Users/yourname/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:88aXd/ksdOekskd7/dyT+ksieolsngSOje7sSKfmsdX youremail@xx.xx</span><br><span class="line">The key's randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|      E=oo..B.o  |</span><br><span class="line">|     .. o.oO*= . |</span><br><span class="line">|         +.o**   |</span><br><span class="line">|         oo +..  |</span><br><span class="line">|        = . .o o |</span><br><span class="line">|         . o. * .|</span><br><span class="line">|      . *   +o o |</span><br><span class="line">|       Xo* .  o .|</span><br><span class="line">|      =.O.= o+   |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure></p>
-<p>把公钥内容复制到剪贴板<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pbcopy &lt; ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="meta">#</span><span class="bash"> Copies the contents of the id_rsa.pub file to your clipboard</span></span><br></pre></td></tr></table></figure></p>
+<p>把公钥内容复制到剪贴板<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pbcopy &lt; ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="meta">#</span> Copies the contents of the id_rsa.pub file to your clipboard</span><br></pre></td></tr></table></figure></p>
 <h2 id="第二步：明文保存到服务端"><a href="#第二步：明文保存到服务端" class="headerlink" title="第二步：明文保存到服务端"></a>第二步：明文保存到服务端</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /home/gitusername</span><br><span class="line">mkdir .ssh</span><br><span class="line">touch .ssh/authorized_keys</span><br><span class="line">vim .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 
       
@@ -549,7 +549,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -566,9 +566,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -585,15 +583,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
